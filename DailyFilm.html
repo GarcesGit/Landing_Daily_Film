@@ -1,162 +1,234 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title> CSS to DailyFilm </title>
-    <link rel="stylesheet" href="CSS to DailyFilm.css">
-  </head>
-  <body>
+    <head>
+        <meta charset="utf-8">
+        <title>DailyFilm </title>
+        <link rel="stylesheet" href="CSS to DailyFilm.css">
+    </head>
+    <body>
+        <div id = 'wrapper'>
 
-<div id = 'wrapper'>
+            <div id="moon"> </div>
+            <div id="earth"> </div>
+            <div id="sun"> </div>
 
-    <div id="moon"> </div>
-    <div id="earth"> </div>
-    <div id="sun"> </div>
+            <div id="greeting">Добрый вечер! Кликните на кружок категории фильма и мы предложим вам, что посмотреть сегодня</div>
+            <div id ="radios">
+                <input type="radio" name="elem" value="Action">Боевики</input>
+                <input type="radio" name="elem" value="Drama">Драмы</input>
+                <input type="radio" name="elem" value="Fiction">Фантастика</input>
+                <button id="button">Описание фильма</button>
+            </div>
 
-    <div id="greeting">Добрый вечер! Кликните на кружок категории фильма и мы предложим вам, что посмотреть сегодня</div>
-    <div id ="radios">
-        <input type="radio" name="elem" value="Action">Боевики</input>
-        <input type="radio" name="elem" value="Drama">Драмы</input>
-        <input type="radio" name="elem" value="Fiction">Фантастика</input>
-        <button id="button">Описание фильма</button>
-    </div>
+            <div id="container">
+                <div id ="content">
+                    <p id="filmTitle"></p>
+                    <a id="filmLink" href ='' ></a>
+                    <p id="filmDescription"></p>
+                    <img id="pictures" src =''>
+                </div>
+            </div>
 
-    <div id="container">
-        <div id ="content">
-            <p id="filmTitle"></p>
-            <p id="filmDescription"></p>
-            <a id="filmLink" href ='' ></p>
-            <img id="pictures" src =''>
+            <div  id="footer">
+                <p>Natalya Koshukova &copy; 2023</p>
+                <a href="https://t.me/NatashKosh">Telegram</a>
+                <br>
+                <a href="https://github.com/GarcesGit">github</a>
+            </div>
         </div>
-    </div>
 
-    <div  id="footer">
-        Natalya Koshukova &copy; 2023
-        <br>
-        <a href="https://t.me/NatashKosh">Telegram</a>
-        <br>
-        <a href="https://github.com/GarcesGit">github</a>
-    </div>
-</div>
+    <script>
 
-<script>
+        let category = {
+                Action: [
+                    'Секреты Лос-Анджелеса (1997)', 'Криминальное чтиво (1994)', 'Бойцовский клуб (1999)', 'Пираты Карибского моря: Проклятие Черной жемчужины (2003)', 'Карты, деньги, два ствола (1998)', 'Пятый элемент (1997)', 'Гладиатор (2000)'
+                ],
+                Drama: [
+                    'Титаник (1997)', 'Форрест Гамп (1994)', 'Побег из Шоушенка (1994)', 'Игры разума (2001)', 'Семь (1995)', 'Престиж (2006)'
+                ],
+                Fiction: [
+                    'Матрица (1999)', 'Начало (2010)', 'Аватар (2009)', 'Люди в чёрном (1997)', 'Время (2011)', 'Темный рыцарь (2008)'
+                ]
+        };
 
-    let category = {
-            Action: [
-                'Секреты Лос-Анджелеса (1997)', 'Криминальное чтиво (1994)',
-/*
-                'Бойцовский клуб (1999)', 'Пираты Карибского моря: Проклятие Черной жемчужины (2003)', 'Карты, деньги, два ствола (1998)', 'Пятый элемент (1997)', 'Гладиатор (2000)'
-            ],
-            Drama: [
-                'Титаник (1997)', 'Форрест Гамп (1994)', 'Побег из Шоушенка (1994)', 'Игры разума (2001)', 'Семь (1995)', 'Престиж (2006)'
-            ],
-            Fiction: [
-                'Матрица (1999)', 'Начало (2010)', 'Аватар (2009)', 'Люди в чёрном (1997)', 'Время (2011)', 'Темный рыцарь (2008
-*/
-            ]
-    };
-
-  let filmData = {
-      'Секреты Лос-Анджелеса (1997)': {
-                  description: 'Бад Уайт и Эд Эксли работают в полиции Лос-Анджелеса. Они настолько разные, что порой ненавидят друг друга. Но их объединяет общее дело — расследование массового убийства. Оба пришли в полицию, чтобы бороться со злом, и оба — по личным причинам.',
-                  link: 'https://www.kinopoisk.ru/film/363/',
-                  photo: 'Секреты.png'
-              },
-    'Криминальное чтиво (1994)': {
-            description: 'Двое бандитов Винсент Вега и Джулс Винфилд ведут философские беседы в перерывах между разборками и решением проблем с должниками криминального босса Марселласа Уоллеса. В первой истории Винсент проводит незабываемый вечер с женой Марселласа Мией. Во второй рассказывается о боксёре Бутче Кулидже, купленном Уоллесом, чтобы сдать бой. В третьей истории Винсент и Джулс по нелепой случайности попадают в неприятности.',
-            link: 'https://www.kinopoisk.ru/film/342/',
-            photo: 'Криминальное чтиво.png'
+        let filmData = {
+            'Секреты Лос-Анджелеса (1997)': {
+                description: 'Бад Уайт и Эд Эксли работают в полиции Лос-Анджелеса. Они настолько разные, что порой ненавидят друг друга. Но их объединяет общее дело — расследование массового убийства. ',
+                link: 'https://www.kinopoisk.ru/film/363/',
+                photo: 'Секреты.png'
             },
+            'Криминальное чтиво (1994)': {
+                description: 'Двое бандитов Винсент Вега и Джулс Винфилд ведут философские беседы в перерывах между разборками и решением проблем с должниками криминального босса Марселласа Уоллеса. ',
+                link: 'https://www.kinopoisk.ru/film/342/',
+                photo: 'Криминальное чтиво.png'
+            },
+            'Бойцовский клуб (1999)': {
+                description: 'Сотрудник страховой компании страдает хронической бессонницей и отчаянно пытается вырваться из мучительно скучной жизни. Однажды в очередной командировке он встречает некоего Тайлера Дёрдена — харизматического торговца мылом с извращенной философией. Тайлер уверен, что самосовершенствование — удел слабых, а единственное, ради чего стоит жить, — саморазрушение.',
+                link: 'https://www.kinopoisk.ru/film/361/',
+                photo: 'Бойцовский клуб.png'
+            },
+            'Пираты Карибского моря: Проклятие Черной жемчужины (2003)': {
+                description: 'Жизнь харизматичного авантюриста, капитана Джека Воробья, полная увлекательных приключений, резко меняется, когда его заклятый враг капитан Барбосса похищает корабль Джека Черную Жемчужину, а затем нападает на Порт Ройал и крадет прекрасную дочь губернатора Элизабет Свонн.',
+                link: 'https://www.kinopoisk.ru/film/4374/',
+                photo: 'Пираты.png'
+            },
+            'Карты, деньги, два ствола (1998)': {
+                description: 'Четверо молодых парней накопили каждый по 25 тысяч фунтов, чтобы один из них мог сыграть в карты с опытным шулером и матерым преступником, известным по кличке Гарри-Топор. Парень в итоге проиграл 500 тысяч, на уплату долга ему дали неделю. В противном случае и ему и его «спонсорам» каждый день будут отрубать по пальцу, а потом... ',
+                link: 'https://www.kinopoisk.ru/film/522/',
+                photo: 'Карты.png'
+            },
+            'Пятый элемент (1997)': {
+                description: 'Каждые пять тысяч лет открываются двери между измерениями и темные силы стремятся нарушить существующую гармонию. Каждые пять тысяч лет Вселенной нужен герой, способный противостоять этому злу. XXIII век. Нью-йоркский таксист Корбен Даллас должен решить глобальную задачу - спасение всего рода человеческого.',
+                link: 'https://www.kinopoisk.ru/film/2656/',
+                photo: 'Пятый элемент.png'
+            },
+            'Гладиатор (2000)': {
+                description: 'В великой Римской империи не было военачальника, равного генералу Максимусу. Непобедимые легионы, которыми командовал этот благородный воин, боготворили его и могли последовать за ним даже в ад. Но случилось так, что отважный Максимус, оказался бессилен против вероломных придворных интриг. Чудом избежав гибели, Максимус становится гладиатором.',
+                link: 'https://www.kinopoisk.ru/film/474/',
+                photo: 'Гладиатор.png'
+            },
+            'Титаник (1997)': {
+                description: 'В первом и последнем плавании шикарного «Титаника» встречаются двое. Пассажир нижней палубы Джек выиграл билет в карты, а богатая наследница Роза отправляется в Америку, чтобы выйти замуж по расчёту. Чувства молодых людей только успевают расцвести, но классовые различия и айсберг создадут испытания влюблённым.',
+                link: 'https://www.kinopoisk.ru/film/2213/',
+                photo: 'Титаник.png'
+            },
+            'Форрест Гамп (1994)': {
+                description: 'Сидя на автобусной остановке, Форрест Гамп — не очень умный, но добрый и открытый парень — рассказывает случайным встречным историю своей необыкновенной жизни. С самого малолетства парень страдал от заболевания ног, соседские мальчишки дразнили его, но в один прекрасный день Форрест открыл в себе невероятные способности.',
+                link: 'https://www.kinopoisk.ru/film/448/',
+                photo: 'Форрест Гамп.png'
+            },
+            'Побег из Шоушенка (1994)': {
+                description: 'Бухгалтер Энди Дюфрейн обвинён в убийстве собственной жены и её любовника. Оказавшись в тюрьме под названием Шоушенк, он сталкивается с жестокостью и беззаконием, царящими по обе стороны решётки. Каждый, кто попадает в эти стены, становится их рабом до конца жизни.',
+                link: 'https://www.kinopoisk.ru/film/326/',
+                photo: 'Побег.png'
+            },
+            'Игры разума (2001)': {
+                description: 'От всемирной известности до греховных глубин — все это познал на своей шкуре Джон Форбс Нэш-младший. Математический гений, он на заре своей карьеры сделал титаническую работу в области теории игр, которая перевернула этот раздел математики и практически принесла ему международную известность. ',
+                link: 'https://www.kinopoisk.ru/film/530/',
+                photo: 'Игры разума.png'
+            },
+            'Семь (1995)': {
+                description: 'Детектив Уильям Сомерсет - ветеран уголовного розыска, мечтающий уйти на пенсию и уехать подальше от города и грешных обитателей. За 7 дней до пенсии на Сомерсета сваливаются две неприятности: молодой напарник Миллс и особо изощренное убийство. Острый ум опытного сыщика сразу определяет, что за этим преступлением, скорее всего, последуют другие. ',
+                link: 'https://www.kinopoisk.ru/film/377/',
+                photo: 'Семь.png'
+            },
+            'Престиж (2006)': {
+                description: 'Роберт и Альфред - фокусники-иллюзионисты, которые на рубеже XIX и XX веков соперничали друг с другом в Лондоне. С годами их дружеская конкуренция на профессиональной почве перерастает в настоящую войну.',
+                link: 'https://www.kinopoisk.ru/film/195334/',
+                photo: 'Престиж.png'
+            },
+            'Матрица (1999)': {
+                description: 'Жизнь Томаса Андерсона разделена на две части: днём он — самый обычный офисный работник, получающий нагоняи от начальства, а ночью превращается в хакера по имени Нео, и нет места в сети, куда он бы не смог проникнуть. Но однажды всё меняется. Томас узнаёт ужасающую правду о реальности.',
+                link: 'https://www.kinopoisk.ru/film/301/',
+                photo: 'Матрица.png'
+            },
+            'Начало (2010)': {
+                description: 'Кобб – талантливый вор, лучший из лучших в опасном искусстве извлечения: он крадет ценные секреты из глубин подсознания во время сна, когда человеческий разум наиболее уязвим. Редкие способности Кобба сделали его ценным игроком в привычном к предательству мире промышленного шпионажа.',
+                link: 'https://www.kinopoisk.ru/film/447301/',
+                photo: 'Начало.png'
+            },
+            'Аватар (2009)': {
+                description: 'Бывший морпех Джейк Салли прикован к инвалидному креслу. Несмотря на немощное тело, Джейк в душе по-прежнему остается воином. Он получает задание совершить путешествие в несколько световых лет к базе землян на планете Пандора, где корпорации добывают редкий минерал, имеющий огромное значение для выхода Земли из энергетического кризиса.',
+                link: 'https://www.kinopoisk.ru/film/251733/',
+                photo: 'Аватар.png'
+            },
+            'Люди в чёрном (1997)': {
+                description: 'Земля кишит пришельцами, за которыми глаз да глаз. Уилл Смит и Томми Ли Джонс в ролях следящих за порядком.',
+                link: 'https://www.kinopoisk.ru/film/1091/',
+                photo: 'Люди в чёрном.png'
+            },
+            'Время (2011)': {
+                description: 'Добро пожаловать в мир, где время стало единственной и самой твердой валютой, где люди генетически запрограммированы так, что в 25 лет перестают стареть. Правда, последующие годы стоят денег. И вот богатые становятся практически бессмертными, а бедные обречены сражаться за жизнь.',
+                link: 'https://www.kinopoisk.ru/film/517988/',
+                photo: 'Время.png'
+            },
+            'Темный рыцарь (2008)': {
+                description: 'Бэтмен поднимает ставки в войне с криминалом. С помощью лейтенанта Джима Гордона и прокурора Харви Дента он намерен очистить улицы Готэма от преступности. Сотрудничество оказывается эффективным, но скоро они обнаружат себя посреди хаоса, развязанного восходящим криминальным гением, известным напуганным горожанам под именем Джокер.',
+                link: 'https://www.kinopoisk.ru/film/111543/',
+                photo: 'Темный рыцарь.png'
+            }
+        };
 
-            /*
-          'Бойцовский клуб (1999)', 'Пираты Карибского моря: Проклятие Черной жемчужины (2003)', 'Карты, деньги, два ствола (1998)', 'Пятый элемент (1997)', 'Гладиатор (2000)'
-            'Титаник (1997)', 'Форрест Гамп (1994)', 'Побег из Шоушенка (1994)', 'Игры разума (2001)', 'Семь (1995)', 'Престиж (2006)'
-            'Матрица (1999)', 'Начало (2010)', 'Аватар (2009)', 'Люди в чёрном (1997)', 'Время (2011)', 'Темный рыцарь (2008)'
-            */
-};
+        function useCategory() {
+            let filmTitle = document.querySelector('#filmTitle');
+            let radios = document.querySelectorAll('input[type="radio"]');
+            let filmLink = document.querySelector('#filmLink');
 
-  function useCategory() {
-    let filmTitle = document.querySelector('#filmTitle');
-    let radios = document.querySelectorAll('input[type="radio"]');
+            for (let radio of radios ){
+                radio.addEventListener('click', function() {
+                    filmDescription.innerHTML = '';
+                    filmLink.innerHTML  = '';
 
-    for (let radio of radios ){
-      radio.addEventListener('click', function() {
-    filmDescription.innerHTML = '';
+                    if (radio.checked) {
+                        switch (radio.value) {
 
-      if (radio.checked) {
-      switch (radio.value) {
+                            case 'Action':
+                            filmTitle.innerHTML = randomFilm(category.Action);
+                            break;
 
-          case 'Action':
-          filmTitle.innerHTML = randomFilm(category.Action);
-        	break;
+                            case 'Drama':
+                            filmTitle.innerHTML = randomFilm(category.Drama);
+                            break;
 
-        	case 'Drama':
-          filmTitle.innerHTML = randomFilm(category.Drama);
-        	break;
-
-        	case 'Fiction':
-          filmTitle.innerHTML = randomFilm(category.Fiction);
-        	break;
+                            case 'Fiction':
+                            filmTitle.innerHTML = randomFilm(category.Fiction);
+                            break;
+                        }
+                    }
+                });
+            }
         }
-      }
-    });
-  }
-}
-useCategory();
+        useCategory();
 
 
-function randomFilm(arr){
-    let random = Math.floor(Math.random() * arr.length);
-    return arr[random];
-}
-
-
-let pictures = document.querySelector('#pictures');
-  function showPictures() {
-    let pic = ['Аватар.png', 'Бойцовский клуб.png', 'Время.png', 'Гладиатор.png', 'Игры разума.png', 'Карты.png', 'Криминальное чтиво.png', 'Люди в чёрном.png', 'Матрица.png', 'Начало.png', 'Пираты.png', 'Побег.png', 'Престиж.png', 'Пятый элемент.png', 'Секреты.png', 'Семь.png', 'Темный рыцарь.png', 'Титаник.png', 'Форрест Гамп.png'];
-
-      let i = 1;
-      pictures.src = pic[0];
-      window.setInterval(function() {
-        pictures.src = pic[i];
-        i++;
-
-        if (i == pic.length) {
-        i = 0;
-      }
-    }, 3000);
-  }
-  showPictures();
-
-function getFilmDescription() {
-    let filmDescription = document.querySelector('#filmDescription');
-    let filmLink = document.querySelector('#filmLink');
-    let button = document.querySelector('button');
-    button.addEventListener('click', function addDescription() {
-        filmDescription.innerHTML = '';
-        filmLink.innerHTML = '';
-        pictures.src = '';
-        filmLink.href  = '';
-
-for (let title in filmData) {
-        if (title == filmTitle.innerHTML){
-        filmDescription.innerHTML += filmData[title].description;
-        filmLink.innerHTML += filmData[title].link;
-        filmLink.href = filmData[title].link;
-        pictures.src = filmData[title].photo;
+        function randomFilm(arr){
+            let random = Math.floor(Math.random() * arr.length);
+            return arr[random];
         }
-    }
-    });
-}
-getFilmDescription();
 
+        function showPictures() {
+            let pictures = document.querySelector('#pictures');
+            let pic = ['Аватар.png', 'Бойцовский клуб.png', 'Время.png', 'Гладиатор.png', 'Игры разума.png', 'Карты.png', 'Криминальное чтиво.png', 'Люди в чёрном.png', 'Матрица.png', 'Начало.png', 'Пираты.png', 'Побег.png', 'Престиж.png', 'Пятый элемент.png', 'Секреты.png', 'Семь.png', 'Темный рыцарь.png', 'Титаник.png', 'Форрест Гамп.png'];
 
+            let i = 1;
+            pictures.src = pic[0];
+            window.setInterval(function() {
+                pictures.src = pic[i];
+                i++;
 
+                if (i == pic.length) {
+                    i = 0;
+                }
+            }, 3000);
+        }
 
+        function getFilmDescription() {
+            let filmDescription = document.querySelector('#filmDescription');
+            let filmLink = document.querySelector('#filmLink');
+            let button = document.querySelector('button');
+            let pictures = document.querySelector('#pictures');
 
+            showPictures();
 
-  </script>
+            button.addEventListener('click', function addDescription() {
+                filmDescription.innerHTML = '';
+                filmLink.href  = '';
+                filmLink.innerHTML  = '';
+                pictures.src = '';
 
+                for (let title in filmData) {
+                    if (title == filmTitle.innerHTML){
+                        filmDescription.innerHTML += filmData[title].description;
+                        filmLink.href = filmData[title].link;
+                        filmLink.textContent += filmLink.href;
+                        pictures.src = filmData[title].photo; // как остановить showPictures() ????
+                    }
+                }
+            });
+        }
+        getFilmDescription();
 
-  </body>
+    </script>
+
+    </body>
 </html>
